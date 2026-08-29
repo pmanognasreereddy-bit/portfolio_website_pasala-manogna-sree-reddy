@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Specification Analysis | TechStore</title>
+    <!-- Stepping back 3 levels to find style.css -->
+    <link rel="stylesheet" href="../../../style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Tech<span>Store</span></div>
+        <nav class="nav-links">
+            <a href="dashboard.html">Shop</a>
+            <a href="cart.html">🛒 Basket (<span class="cart-count">0</span>)</a>
+            <a href="orders.html">My Orders</a>
+            <a href="login.html">Logout</a>
+        </nav>
+    </header>
+
+    <main class="main-content" style="max-width: 1000px; margin: 3rem auto; background: white; padding: 3rem; border-radius: 8px;">
+        <div style="display: flex; gap: 4rem; flex-wrap: wrap;" id="product-container">
+            <div style="flex: 1; min-width: 300px; background: #f1f5f9; height: 350px; display: flex; align-items: center; justify-content: center; font-size: 5rem;" id="item-art">
+                🎧
+            </div>
+            <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; justify-content: center;">
+                <span id="item-badge" style="background: #eff6ff; color: var(--primary-blue); font-weight: 700; font-size: 0.8rem; padding: 0.3rem 0.8rem; border-radius: 20px; align-self: flex-start; margin-bottom: 0.5rem;">Audio Setup</span>
+                <h1 id="item-name" style="font-size: 2.4rem; color: #0f172a; margin-bottom: 0.5rem;">Hardware Item</h1>
+                <p id="item-price" style="font-size: 1.8rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 1.5rem;">$0.00</p>
+                
+                <h3 style="margin-bottom: 0.5rem; font-size: 1rem; text-transform: uppercase; color: #64748b;">Detailed System Overview</h3>
+                <p id="item-long-desc" style="color: #475569; margin-bottom: 2rem; line-height: 1.7;">
+                    This submission item model features premium industrial engineering, component durability testing matrices, and high fidelity processing logic.
+                </p>
+                
+                <button class="btn btn-user" id="detail-add-btn" style="padding: 1rem; font-size: 1.1rem;">🛒 Secure Hardware & Add to Cart</button>
+                <a href="dashboard.html" style="text-align: center; margin-top: 1rem; color: #64748b; text-decoration: none;">&larr; Return to Catalog</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Read query target params to adjust page contents dynamically
+            const params = new URLSearchParams(window.location.search);
+            const target = params.get('item') || 'headphones';
+
+            const database = {
+                headphones: { name: "Wireless Headphones", price: "$89.99", art: "🎧", badge: "Audio Setup" },
+                keyboard: { name: "Mechanical Keyboard", price: "$129.99", art: "⌨️", badge: "Keyboards" },
+                watch: { name: "Smart Fitness Watch", price: "$199.99", art: "⌚", badge: "Wearables" },
+                monitor: { name: '34" UltraWide Monitor', price: "$349.99", art: "🖥️", badge: "Displays" }
+            };
+
+            const data = database[target] || database.headphones;
+            document.getElementById('item-name').textContent = data.name;
+            document.getElementById('item-price').textContent = data.price;
+            document.getElementById('item-art').textContent = data.art;
+            document.getElementById('item-badge').textContent = data.badge;
+
+            // Connect shopping counters
+            const counters = document.querySelectorAll(".cart-count");
+            let count = parseInt(localStorage.getItem("cartTotalCount")) || 0;
+            counters.forEach(el => el.textContent = count);
+
+            document.getElementById('detail-add-btn').addEventListener('click', function() {
+                count++;
+                localStorage.setItem("cartTotalCount", count);
+                counters.forEach(el => el.textContent = count);
+                this.textContent = "✅ Item Documented in Basket";
+                this.style.backgroundColor = "var(--success-green)";
+            });
+        });
+    </script>
+    <script src="../../../script.js"></script>
+</body>
+</html>

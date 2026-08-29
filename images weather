@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student CRUD Portal</title>
+  <!-- Link to the external stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="card">
+    <h2>Student Management Portal</h2>
+
+    <form id="studentForm">
+      <input type="text" id="name" placeholder="Student Name" required />
+      <input type="text" id="course" placeholder="Course" required />
+      <button type="submit" id="saveBtn" class="add-btn">Add Student</button>
+    </form>
+
+    <ul id="studentList"></ul>
+  </div>
+
+  <script>
+    let editId = null;
+
+    async function fetchStudents() {
+      const res = await fetch('/api/students');
+      const data = await res.json();
+      const list = document.getElementById('studentList');
+      list.innerHTML = '';
+      data.forEach(s => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span><strong>${s.name}</strong> (${s.course})</span>
+          <div>
+            <button class="edit-btn" onclick="setEdit(${s.id}, '${s.name}', '${s.course}')">Edit</button>
+            <button class="delete-btn" onclick="deleteStudent(${s.id})">Delete</button>
+          </div>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    document.getElementById('studentForm').onsubmit = async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const course = document.getElementById('course').value;
+
+      if (editId) {
+        await fetch('/api/students/' + editId, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, course })
+        });
+        editId = null;
+        document.getElementById('saveBtn').innerText = 'Add Student';
+        document.getElementById('saveBtn').className = 'add-btn';
+      } else {
+        await fetch('/api/students', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, course })
+        });
+      }
+
+      document.getElementById('studentForm').reset();
+      fetchStudents();
+    };
+
+    function setEdit(id, name, course) {
+      editId = id;
+      document.getElementById('name').value = name;
+      document.getElementById('course').value = course;
+      document.getElementById('saveBtn').innerText = 'Update Student';
+      document.getElementById('saveBtn').className = 'edit-btn';
+    }
+
+    async function deleteStudent(id) {
+      await fetch('/api/students/' + id, { method: 'DELETE' });
+      fetchStudents();
+    }
+
+    fetchStudents();
+  </script>
+
+</body>
+</html>

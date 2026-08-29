@@ -1,0 +1,525 @@
+/* styles.css - Start styling your potfolio website here */
+/* === RESET & BASE === */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* CSS Custom Properties (variables) - DRY Principle */
+:root {
+    --primary: #1B4F72;
+    --accent: #F18F01;
+    --text: #2C3E50;
+    --light: #F4F6F8;
+    --white: #FFFFFF;
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+body {
+    font-family: var(--font-main);
+    color: var(--text);
+    line-height: 1.6;
+    background-color: var(--white);
+}
+/* NAVIGATION */
+.site-header{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--primary);
+    transition: background 0.5s ease, box-shadow 0.5s ease; /*Day 9*/
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+   
+}
+.logo{
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--white);
+}
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+.nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+.nav-links a:hover {
+    color: var(--accent);
+
+}
+.nav-links a.active{
+    color: var(--accent);
+    font-weight: bold;
+    border-bottom: 2px solid var(--accent);
+}
+/* === BUTTON STYLES === */
+.btn{
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.5s ease;
+    margin-top: 15px;
+      
+}
+.btn-primary{
+    background: var(--accent);
+    color: var(--white);
+    
+}
+.btn-primary:hover{
+    background: transparent;
+    color: var(--accent);
+    border-color: var(--accent);
+}
+.btn-secondary{
+    background: transparent;
+    color: var(--white);
+    border-color: var(--white);
+}
+.btn-secondary:hover{
+    background: var(--white);
+    color: var(--primary);
+}
+.project-filters{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+.filter-btn{
+    padding: 8px 20px;
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.5s ease;
+}
+.filter-btn:hover,
+.filter-btn.active{
+    background: var(--primary);
+    color: var(--white);
+
+}
+/* === SECTION STYLES === */
+section{
+    padding: 80px 5%;
+}
+section h2{
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 50px;
+    color: var(--primary);
+}
+
+section h2::after{
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--accent);
+    margin: 12px auto 0;
+    border-radius: 2px;
+}
+
+/* HERO SECTION */
+.hero-section {
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary), #2E86AB);
+    color: var(--white);
+    padding: 100px 5%;
+}
+.hero-section h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+
+}
+/* === ABOUT SECTION === */
+.about-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:30px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+.profile-figure{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+   
+}
+.profile-figure img{
+   aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid var(--primary);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    transition: transform 0.5s ease;
+}
+
+.profile-figure img:hover{
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+figcaption{
+    margin-top: 15px;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.about-text{
+    max-width: 700px;
+    text-align: center;
+    font-weight: bold;
+    color: var(--primary);
+    
+}
+/* SKILLS SECTION */
+.skills-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+    gap: 20px;
+    margin-top: 40px;
+    justify-items: space-between;
+}
+.skill-item{
+    background: var(--light);
+    border: 2px solid var(--primary);
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: transform 0.5s, box-shadow 0.5s;
+}
+.skill-item:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+/* PROJECTS SECTION */
+.projects-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+.project-card{
+    background: var(--light);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.5s, box-shadow 0.5s;
+    display: flex;
+    flex-direction: column;
+}
+.project-card:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+.project-card img{
+    width: 100%;
+    height:200px;
+    object-fit: cover;
+}
+.project-card-body{
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+/* === CONTACT FORM === */
+.contact-section{
+    background: var(--light);
+}
+
+.form-group{
+    margin-bottom: 24px;
+}
+
+.form-group label{
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.form-group input,
+.form-group textarea,
+.form-select{
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #DDD;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.5s;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group .form-select:focus{
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(27, 79, 114, 0.2);
+}
+/* === FOOTER === */
+.site-footer{
+    background: var(--primary);
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 40px 5%;
+}
+/* === RESPONSIVE === */
+@media (max-width: 768px){
+    .hero-section h1 {font-size: 2rem;}
+    .projects-grid {grid-template-columns: 1fr;}
+}
+/* CSS ADDED FOR MENU TOGGLE */
+/* === MOBILE NAVIGATION ==== */
+.menu-toggle{
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+
+}
+@media (max-width:768px){
+    .menu-toggle{
+        display:block;
+    }
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        background:#1B4F72;
+        flex-direction:column;
+        text-align:center;
+        padding:20px 0;
+        gap:20px;
+    }
+.nav-links.open{
+        display:flex;
+
+    }
+}
+.site-header.scrolled{
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+}
+/* === ANIMATIONS === */
+@keyframes fadeInUp{
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.hero-section h1{
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+.tagline{
+    animation: fadeInUp 0.8s ease 0.4s both;
+}
+.hero-buttons{
+    animation: fadeInUp 0.8s ease 0.6s both;
+}
+/* FOR DARK MODE CSS CODE */
+/* ========================================
+   DARK MODE
+======================================== */
+ 
+ 
+/* Smooth Transition */
+body,
+.site-header,
+.hero-section,
+.skill-item,
+.project-card,
+.contact-section,
+.site-footer,
+input,
+textarea,
+.btn,
+a {
+    transition: all 0.3s ease;
+}
+ 
+ 
+/* Body */
+body[data-theme="dark"] {
+    background: #121212;
+    color: #f5f5f5;
+}
+ 
+ 
+/* Header */
+body[data-theme="dark"] .site-header,
+body[data-theme="dark"] .navbar {
+    background: #1a1a1a;
+}
+ 
+ 
+/* Navigation Links */
+body[data-theme="dark"] .nav-links a {
+    color: #ffffff;
+}
+ 
+ 
+body[data-theme="dark"] .nav-links a:hover,
+body[data-theme="dark"] .nav-links a.active {
+    color: #F18F01;
+}
+ 
+ 
+/* Logo */
+body[data-theme="dark"] .logo {
+    color: #ffffff;
+}
+ 
+ 
+/* Hero */
+body[data-theme="dark"] .hero-section {
+    background: linear-gradient(135deg, #111827, #1f2937);
+}
+ 
+ 
+/* Highlight */
+body[data-theme="dark"] .highlight {
+    color: #F18F01;
+}
+ 
+ 
+/* About */
+body[data-theme="dark"] .about-section {
+    background: #121212;
+    color: #f5f5f5;
+}
+ 
+ 
+/* Skills */
+body[data-theme="dark"] .skills-section {
+    background: #181818;
+}
+ 
+ 
+body[data-theme="dark"] .skill-item {
+    background: #242424;
+    color: #ffffff;
+    border-color: #F18F01;
+}
+ 
+ 
+/* Projects */
+body[data-theme="dark"] .projects-section {
+    background: #121212;
+}
+ 
+ 
+body[data-theme="dark"] .project-card {
+    background: #242424;
+    color: #ffffff;
+    box-shadow: 0 5px 20px rgba(255,255,255,0.08);
+}
+ 
+ 
+body[data-theme="dark"] .project-card h3,
+body[data-theme="dark"] .project-card p {
+    color: #ffffff;
+}
+ 
+ 
+/* Tags */
+body[data-theme="dark"] .tag {
+    background: #F18F01;
+    color: #ffffff;
+}
+ 
+ 
+/* Contact */
+body[data-theme="dark"] .contact-section {
+    background: #181818;
+}
+ 
+ 
+/* Form */
+body[data-theme="dark"] input,
+body[data-theme="dark"] textarea {
+    background: #2b2b2b;
+    color: #ffffff;
+    border: 1px solid #555;
+}
+ 
+ 
+body[data-theme="dark"] input::placeholder,
+body[data-theme="dark"] textarea::placeholder {
+    color: #bdbdbd;
+}
+ 
+ 
+body[data-theme="dark"] label {
+    color: #ffffff;
+}
+ 
+ 
+/* Buttons */
+body[data-theme="dark"] .btn-primary {
+    background: #F18F01;
+    color: #ffffff;
+}
+ 
+ 
+body[data-theme="dark"] .btn-secondary {
+    border-color: #ffffff;
+    color: #ffffff;
+}
+ 
+ 
+body[data-theme="dark"] .btn-secondary:hover {
+    background: #ffffff;
+    color: #121212;
+}
+ 
+ 
+/* Footer */
+body[data-theme="dark"] .site-footer {
+    background: #1a1a1a;
+    color: #cccccc;
+}
+ 
+ 
+body[data-theme="dark"] .site-footer a {
+    color: #ffffff;
+}
+ 
+ 
+body[data-theme="dark"] .site-footer a:hover {
+    color: #F18F01;
+}
+ 
+ 
+/* Theme Button */
+body[data-theme="dark"] .theme-toggle {
+    background: #333333;
+    color: #ffffff;
+    border: 1px solid #666666;
+}
+.form-group input.error,
+.form-group textarea.error {
+    border: 2px solid red;
+}
